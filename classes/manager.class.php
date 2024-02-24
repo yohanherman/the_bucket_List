@@ -6,7 +6,7 @@ abstract class abstractManager
 
     abstract public function addTask(string $_task);
     abstract public function displayTask();
-    abstract public function deleteTask();
+    abstract public function deleteTask(int $id);
     abstract public function editTask();
 }
 
@@ -138,8 +138,31 @@ class Manager extends abstractManager
 
 
 
-    public function deleteTask()
+    // public function changeStatusto0($id)
+    // {
+    //     if ($this->getStatus() == 1) {
+
+    //         $requete = 'UPDATE task SET status = 0 WHERE id =:id';
+    //         $stmt = $this->_conn->prepare($requete);
+    //         $stmt->bindParam(':id', $id);
+    //         $stmt->execute();
+    //     } elseif ($this->getStatus() == 0) {
+    //         $requete1 = 'UPDATE task SET status = 1 WHERE id =:id';
+    //         $stmt1 = $this->_conn->prepare($requete1);
+    //         $stmt1->bindParam(':id', $id);
+    //         $stmt1->execute();
+    //     }
+    // }
+
+
+
+    public function deleteTask($id)
     {
+
+        $request = "DELETE FROM task WHERE id =:id";
+        $stmt = $this->_conn->prepare($request);
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
     }
 
     public function editTask()

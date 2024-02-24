@@ -8,6 +8,7 @@ function loadClasses($classe)
 spl_autoload_register('loadClasses');
 
 // instanciation de ma database
+
 $connexion = new Database;
 
 // instanciatioin de ma classe
@@ -22,22 +23,26 @@ if (isset($_POST["addTask"])) {
     $manager->addTask($_task);
 }
 
+// if (isset($_POST['changeStatus0'])) {
+
+//     $id = $_POST['id'];
+//     $manager->changeStatusto1($id);
+// } elseif (isset($_POST['changeStatus1'])) {
+
+//     $id = $_POST['id'];
+//     $manager->changeStatusto0($id);
+// }
+
 
 if (isset($_POST['changeStatus0'])) {
 
     $id = $_POST['id'];
-
     $manager->changeStatusto1($id);
-}
-
-
-if (isset($_POST['changeStatus1'])) {
+} elseif (isset($_POST['changeStatus1'])) {
 
     $id = $_POST['id'];
     $manager->changeStatusto0($id);
 }
-
-
 
 ?>
 
@@ -150,6 +155,20 @@ if (isset($_POST['changeStatus1'])) {
                             </form>
 
                         <?php  } ?>
+
+                        <td>
+                            <form action="" method="POST">
+                                <button>modify</button>
+                            </form>
+                        </td>
+
+                        <td>
+                            <form action='confirmationDeletion.php' method='POST'>
+                                <input type='hidden' name='id' value='<?= $task->getId() ?>'>
+                                <input type='hidden' name='taskName' value='<?= $task->getTask() ?>'>
+                                <button type='submit' class="border-0 bg-danger rounded text-white p-2">delete</button>
+                            </form>
+                        </td>
 
                         </tr>
 
